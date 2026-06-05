@@ -1,61 +1,530 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DYP — Did You Publish?</title>
+  <title>DYP – <span data-i18n="did_you_publish">Did You Publish?</span></title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="logo" href="#home"><strong>DYP</strong><span>Did You Publish?</span></a>
-    <nav class="nav">
-      <a href="#signup">Sign up</a><a href="#market">Market</a><a href="#portfolio">Portfolio</a><a href="#leaderboard">Leaderboard</a><a href="#profile">Profile</a><a href="#admin">Admin</a>
+  <div class="noise"></div>
+
+  <header class="navbar">
+    <a class="dyp-header-logo" href="#">
+      <div class="dyp-header-main">DYP</div>
+      <div class="dyp-header-sub">Did You Publish?</div>
+    </a>
+    <nav class="main-nav">
+      <a href="#signup"><span data-i18n="nav_signup">Sign up</span></a>
+
+      <div class="nav-dropdown">
+        <button type="button"><span data-i18n="nav_market">Market</span> ▾</button>
+        <div class="dropdown-menu">
+          <a href="#market"><span data-i18n="nav_market_overview">Overview</span></a>
+          <a href="#analytics"><span data-i18n="nav_analytics">Analytics</span></a>
+          <a href="#methodology"><span data-i18n="nav_methodology">Methodology</span></a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <button type="button"><span data-i18n="nav_brands">Brands</span> ▾</button>
+        <div class="dropdown-menu">
+          <a href="#brands"><span data-i18n="nav_all_brands">All Brands</span></a>
+          <a href="#brands"><span data-i18n="nav_top_gainers">Top Gainers</span></a>
+          <a href="#brands"><span data-i18n="nav_top_losers">Top Losers</span></a>
+          <a href="#brands"><span data-i18n="nav_sectors">Sectors</span></a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <button type="button"><span data-i18n="nav_portfolios">Portfolios</span> ▾</button>
+        <div class="dropdown-menu">
+          <a href="#portfolio"><span data-i18n="nav_my_portfolio">My Portfolio</span></a>
+          <a href="#ranking"><span data-i18n="leaderboard">Leaderboard</span></a>
+          <a href="#profile"><span data-i18n="badge_cabinet">Badge Cabinet</span></a>
+        </div>
+      </div>
+
+      <a href="#profile"><span data-i18n="nav_profile">Profile</span></a>
     </nav>
-    <button class="top-publish" onclick="goToPublish()">PUBLISH</button>
+
+    <div class="nav-actions">
+      <button id="topPublishButton" class="publish-top publish-action" onclick="handleTopPublish()">
+        <span data-i18n="publish_button_top">PUBLISH</span>
+      </button>
+
+      <div class="language-area">
+        <span class="language-hint" data-i18n="select_language">Language</span>
+        <div class="language-pill">
+          <button type="button" id="languageButton" class="language-button" onclick="toggleLanguageMenu()">
+            <span id="languageFlag">🇮🇹</span>
+          </button>
+          <div id="languageMenu" class="language-menu">
+            <button type="button" onclick="setLanguageFromMenu('it')"><span>🇮🇹</span><b>Italiano</b></button>
+            <button type="button" onclick="setLanguageFromMenu('en')"><span>🇬🇧</span><b>English</b></button>
+            <button type="button" onclick="setLanguageFromMenu('pt')"><span>🇵🇹</span><b>Português</b></button>
+            <button type="button" onclick="setLanguageFromMenu('es')"><span>🇪🇸</span><b>Español</b></button>
+            <button type="button" onclick="setLanguageFromMenu('fr')"><span>🇫🇷</span><b>Français</b></button>
+            <button type="button" onclick="setLanguageFromMenu('de')"><span>🇩🇪</span><b>Deutsch</b></button>
+            <button type="button" onclick="setLanguageFromMenu('zh')"><span>🇨🇳</span><b>中文</b></button>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main>
-    <section id="home" class="hero">
-      <div>
-        <div class="pill">WEEK 02 MARKET OPEN</div>
-        <h1>DYP</h1>
-        <p>The Fantasy Marketing Exchange.</p>
-        <p class="muted">Track brands. Predict momentum. Compete for the highest rating.</p>
-        <div class="hero-actions"><button class="primary" onclick="scrollToSection('portfolio')">Publish your prediction</button><button class="secondary" onclick="scrollToSection('market')">View market</button></div>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="pill"><span data-i18n="hero_pill">WEEK 01 MARKET OPEN</span></div>
+        <div class="hero-logo-word">DYP</div>
+        <h1><span data-i18n="hero_title">Did You Publish?</span></h1>
+        <p>
+          <span data-i18n="hero_subtitle">Leggi il mercato dei brand. Pubblica la tua previsione. Dimostra di avere occhio.</span>
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary" onclick="scrollToSection('signup')"><span data-i18n="hero_cta_profile">Create Free Profile</span></button>
+          <button class="ghost" onclick="scrollToSection('analytics')"><span data-i18n="hero_cta_analytics">Explore Analytics</span></button>
+        </div>
+
+        <div class="hero-stats">
+          <div><strong>100</strong><span><span data-i18n="stat_credits">DYP Credits</span></span></div>
+          <div><strong>500</strong><span><span data-i18n="stat_rating">Starting Rating</span></span></div>
+          <div><strong>Observer</strong><span><span data-i18n="stat_title">First <span data-i18n="title_label">Title</span></span></span></div>
+        </div>
       </div>
-      <div class="hero-panel">
-        <div class="panel-head"><span>Live Demo Market</span><b>Week 02</b></div>
-        <div class="mini-chart"><div class="bar up" style="height:68%"><span>NIKE</span></div><div class="bar up" style="height:56%"><span>APPLE</span></div><div class="bar down" style="height:38%"><span>ADIDAS</span></div><div class="bar up" style="height:72%"><span>NETFLIX</span></div><div class="bar up" style="height:64%"><span>TESLA</span></div></div>
+
+      <aside class="terminal-card">
+        <div class="terminal-top">
+          <span><span data-i18n="market_index">DYP MARKET INDEX</span></span>
+          <span class="status">LIVE</span>
+        </div>
+
+        <div class="index-value">
+          <span>1,284.66</span>
+          <strong>+8.42%</strong>
+        </div>
+
+        <div class="performance-bars">
+          <div class="perf-bar up"><i style="height: 48%"></i><span>RB</span></div>
+          <div class="perf-bar up"><i style="height: 62%"></i><span>NKE</span></div>
+          <div class="perf-bar down"><i style="height: 34%"></i><span>ADS</span></div>
+          <div class="perf-bar up"><i style="height: 54%"></i><span>FRR</span></div>
+          <div class="perf-bar down"><i style="height: 28%"></i><span>APL</span></div>
+          <div class="perf-bar up"><i style="height: 72%"></i><span>NVDA</span></div>
+          <div class="perf-bar up"><i style="height: 44%"></i><span>TSLA</span></div>
+        </div>
+
+        <div class="ticker">
+          <div><span>RED BULL</span><b>+12.4%</b></div>
+          <div><span>NIKE</span><b>+8.1%</b></div>
+          <div><span>FERRARI</span><b>+5.8%</b></div>
+          <div class="down"><span>ADIDAS</span><b>-2.7%</b></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="signup" class="section signup-section">
+      <div class="section-head signup-head">
+        <div>
+          <span class="kicker" data-i18n="signup_kicker">Free onboarding</span>
+          <h2><span data-i18n="signup_title">Create your DYP profile</span></h2>
+          <p class="signup-subtitle" data-i18n="signup_desc">Create your DYP profile with username, email and password. No avatars, no external login, no unnecessary steps.</p>
+        </div>
+      </div>
+
+      <div class="clean-signup-shell">
+        <div class="signup-card clean-form-card">
+          <h3 data-i18n="account_access">Create account</h3>
+
+          <label><span data-i18n="username_label">DYP Username</span></label>
+          <input id="usernameInput" type="text" placeholder="Your username" oninput="updateProfilePreview()" />
+
+          <label><span data-i18n="email_label">Email</span></label>
+          <input id="emailInput" type="email" placeholder="you@example.com" />
+
+          <label><span data-i18n="password_label">Password</span></label>
+          <input id="passwordInput" type="password" placeholder="Minimum 8 characters" />
+
+          <button class="primary full form-create-btn" onclick="createProfile()" data-i18n="create_profile">CREATE PROFILE</button>
+
+          <p class="privacy-note">▢ <span data-i18n="safe_data_note">Your data is safe. Never shared with third parties.</span></p>
+          <p id="profileMessage" class="publish-message"></p>
+        </div>
+
+        <div class="profile-start-card">
+          <span class="kicker" data-i18n="starting_profile">Starting profile</span>
+          <h3>@marketeye</h3>
+          <div class="start-stats">
+            <div><span>DYP Rating</span><strong>500</strong></div>
+            <div><span>Title</span><strong>Observer</strong></div>
+            <div><span>DYP Credits</span><strong>100</strong></div>
+            <div><span>Market Vision</span><strong>0%</strong></div>
+          </div>
+          <p data-i18n="starting_profile_desc">Publish your first portfolio to enter the ranking and start building your reputation.</p>
+        </div>
       </div>
     </section>
 
-    <section id="signup" class="section">
-      <div class="section-head"><div><span class="kicker">Free account</span><h2>Create your DYP profile</h2></div><p>Create an account, publish a portfolio and enter the ranking.</p></div>
-      <div class="auth-grid">
-        <div class="card"><h3>Create / Login</h3><label>Username</label><input id="usernameInput" type="text" placeholder="marketeye" oninput="previewUsername()"/><label>Email</label><input id="emailInput" type="email" placeholder="you@example.com"/><label>Password</label><input id="passwordInput" type="password" placeholder="minimum 8 characters"/><button class="primary full" onclick="createAccount()">CREATE PROFILE</button><button class="secondary full" onclick="loginAccount()">LOGIN</button><button class="secondary full" onclick="logoutAccount()">LOGOUT</button><p id="authMessage" class="message"></p></div>
-        <div class="card profile-preview"><span class="kicker">Starting profile</span><h3 id="signupUsernamePreview">@marketeye</h3><div class="stat-grid"><div><span>DYP Rating</span><b>500</b></div><div><span>Title</span><b>Observer</b></div><div><span>Status</span><b id="firebaseStatus">Demo</b></div><div><span>Portfolios</span><b id="previewPortfolios">0</b></div></div><p class="muted">Status becomes “Online” when Firebase and Firestore rules are correct.</p></div>
+<section id="profile" class="section profile-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><span data-i18n="profile_kicker">Your reputation</span></span>
+          <h2><span data-i18n="profile_title">Your DYP profile</span></h2>
+        </div>
+        <p>
+          <span data-i18n="profile_desc">Qui l’utente vede rating, titolo, streak e badge. I premi non servono subito: all’inizio il valore è dimostrare di avere occhio.</span>
+        </p>
+      </div>
+
+      <div class="profile-layout">
+        <div class="profile-main-card no-avatar-profile">
+          <div>
+            <span class="profile-label">DYP Player</span>
+            <h3 id="profileUsername">@marketeye</h3>
+            <p id="profileSubtitle">Observer · build your reputation by publishing portfolios</p>
+          </div>
+        </div>
+
+        <div class="profile-stats">
+          <div><span><span data-i18n="dyp_rating">DYP Rating</span></span><strong>500</strong></div>
+          <div><span><span data-i18n="title_label">Title</span></span><strong>Observer</strong></div>
+          <div><span><span data-i18n="market_vision">Market Vision</span></span><strong>0%</strong></div>
+          <div><span><span data-i18n="publish_streak">Publish Streak</span></span><strong>0 weeks</strong></div>
+        </div>
+
+
+        <div class="profile-portfolio-card">
+          <div class="panel-title">
+            <h3>My Portfolio</h3>
+            <span>Week 01</span>
+          </div>
+          <div id="profilePortfolioPreview" class="profile-portfolio-list">
+            <p>Nessun portafoglio pubblicato.</p>
+          </div>
+        </div>
+
+        <div class="badge-cabinet">
+          <div class="panel-title">
+            <h3><span data-i18n="badge_cabinet">Badge Cabinet</span></h3>
+            <span><span data-i18n="locked">locked</span></span>
+          </div>
+          <div class="badge-grid">
+            <div class="badge <span data-i18n="locked">locked</span>"><b>🌱</b><span>Green Week</span><small>First positive week</small></div>
+            <div class="badge <span data-i18n="locked">locked</span>"><b>🔥</b><span>Momentum</span><small>5 positive weeks</small></div>
+            <div class="badge <span data-i18n="locked">locked</span>"><b>👁</b><span>Trend Spotter</span><small>Pick a Top 3 brand</small></div>
+            <div class="badge <span data-i18n="locked">locked</span>"><b>💎</b><span>Hidden Gem</span><small>Find an outsider</small></div>
+            <div class="badge <span data-i18n="locked">locked</span>"><b>🔮</b><span>Visionary</span><small>Outperform consistently</small></div>
+            <div class="badge <span data-i18n="locked">locked</span>"><b>⚡</b><span><span data-i18n="did_you_publish">Did You Publish?</span></span><small>52-week streak</small></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="market" class="section"><div class="section-head"><div><span class="kicker">Market</span><h2>Brand momentum board</h2></div><p>Demo scores for the current MVP. Replace with real data sources later.</p></div><div id="marketGrid" class="brand-grid"></div></section>
+    <section id="market" class="section">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><span data-i18n="brand_market">Brand Market</span></span>
+          <h2><span data-i18n="market_title">Marketing stocks of the week</span></h2>
+        </div>
+        <p><span data-i18n="market_desc">Ogni brand ha un <span data-i18n="dyp_score">DYP Score</span>, cioè una misura sintetica del suo momentum marketing settimanale.</span></p>
+      </div>
 
-    <section id="portfolio" class="section">
-      <div class="section-head"><div><span class="kicker">Portfolio</span><h2>Publish your Week 02 prediction</h2></div><p>Allocate exactly 100 points across brands. Higher conviction means more points.</p></div>
-      <div class="portfolio-layout"><div class="card"><div class="portfolio-top"><h3>Build your portfolio</h3><div class="total-pill">Total: <b id="allocationTotal">0</b>/100</div></div><div id="allocationList" class="allocation-list"></div><button class="primary full" onclick="publishPortfolio()">PUBLISH PORTFOLIO</button><p id="publishMessage" class="message"></p></div><div class="card"><h3>How weekly score works</h3><p class="muted">Each brand has a demo Week 01 momentum value. Your points are multiplied by each brand’s momentum.</p><div class="formula">Weekly Score = Σ allocation × brand momentum</div><p class="muted">Example: 40 points on Nike with +12.4 momentum = 496 score contribution.</p></div></div>
+      <div class="market-grid" id="marketGrid"></div>
     </section>
 
-    <section id="leaderboard" class="section"><div class="section-head"><div><span class="kicker">Competition</span><h2>DYP leaderboard</h2></div><p>Players are ranked by DYP Rating.</p></div><div id="leaderboardBoard" class="leaderboard card"><div class="rank-row head"><span>#</span><span>Player</span><span>Title</span><span>Rating</span></div><div class="rank-row"><span>01</span><span>@marketeye</span><span>Observer</span><strong>500</strong></div></div></section>
 
-    <section id="profile" class="section"><div class="section-head"><div><span class="kicker">Profile</span><h2>Your DYP reputation</h2></div></div><div class="profile-grid"><div class="card profile-main"><span class="profile-label">DYP Player</span><h3 id="profileUsername">@marketeye</h3><p id="profileSubtitle">Observer · publish portfolios to build your reputation</p></div><div class="stat-grid profile-stats"><div><span>DYP Rating</span><b id="profileRating">500</b></div><div><span>Title</span><b id="profileTitle">Observer</b></div><div><span>Published</span><b id="profilePublished">0</b></div><div><span>Best score</span><b id="profileBestScore">0</b></div></div></div><div class="card"><h3>Your latest portfolio</h3><div id="latestPortfolio"><p class="muted">No portfolio published yet.</p></div></div></section>
+    <section id="brands" class="section brands-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Brand Universe</span>
+          <h2>Explore all DYP brands</h2>
+        </div>
+        <p>
+          Il mercato iniziale include oltre 20 brand divisi per settore. Filtra mentalmente per categoria,
+          confronta i mover e costruisci la tua tesi prima di pubblicare.
+        </p>
+      </div>
 
-    <section id="admin" class="section"><div class="section-head"><div><span class="kicker">Admin</span><h2>DYP activity dashboard</h2></div><p>Visible in the MVP so you can check if the product is working.</p></div><div class="admin-grid"><div class="card admin-stat"><span>Registered users</span><b id="adminUsers">0</b></div><div class="card admin-stat"><span>Published portfolios</span><b id="adminPortfolios">0</b></div><div class="card admin-stat"><span>Most picked brand</span><b id="adminTopBrand">-</b></div><div class="card admin-stat"><span>Backend</span><b id="adminBackend">Demo</b></div></div><div class="card"><h3>Latest users</h3><div id="adminUsersList"><p class="muted">No users yet.</p></div></div></section>
+      <div class="brand-tabs">
+        <button class="brand-tab active">All Brands</button>
+        <button class="brand-tab">Top Gainers</button>
+        <button class="brand-tab">Top Losers</button>
+        <button class="brand-tab">Sectors</button>
+      </div>
 
-    <section class="section legal"><div class="card"><h3>Brand references</h3><p>DYP is an independent analytics and fantasy marketing platform. Brand names and visual references are used only for identification, comparison and informational purposes. All trademarks, logos and brand names are the property of their respective owners. Their use does not imply endorsement, sponsorship or affiliation with DYP.</p></div></section>
+      <div class="all-brands-grid" id="allBrandsGrid"></div>
+    </section>
+
+    <section id="portfolio" class="section portfolio-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><span data-i18n="portfolio_kicker">Your DYP Card</span></span>
+          <h2><span data-i18n="portfolio_title">Publish your weekly prediction</span></h2>
+        </div>
+        <p><span data-i18n="portfolio_desc">Distribuisci esattamente 100 punti. Quando pubblichi, la scheda viene bloccata fino ai risultati.</span></p>
+      </div>
+
+      <div class="portfolio-layout">
+        <div class="glass-panel">
+          <div class="panel-title">
+            <h3><span data-i18n="allocation_desk">Allocation desk</span></h3>
+            <span><span data-i18n="credits_100">100 credits</span></span>
+          </div>
+          <div id="allocationList"></div>
+
+          <div class="allocation-total">
+            <span><span data-i18n="total_allocated">Total allocated</span></span>
+            <strong id="totalAllocated">0 / 100</strong>
+          </div>
+
+          <button class="primary full" onclick="publishPortfolio()"><span data-i18n="publish_card">PUBLISH CARD</span></button>
+          <p id="publishMessage" class="publish-message"></p>
+        </div>
+
+        <div class="dyp-card">
+          <div class="dyp-card-top">
+            <div>
+              <span><span data-i18n="dyp_card">DYP CARD</span></span>
+              <h3><span data-i18n="week_portfolio">Week 01 Portfolio</span></h3>
+            </div>
+            <div class="qr-fake"></div>
+          </div>
+
+          <div id="portfolioPreview" class="portfolio-preview">
+            <p><span data-i18n="no_allocation">Nessuna quota assegnata.</span></p>
+          </div>
+
+          <div class="card-footer">
+            <span><span data-i18n="did_you_publish">Did You Publish?</span></span>
+            <strong>NOT YET</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="analytics" class="section analytics-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><span data-i18n="analytics_kicker">Brand Analytics</span></span>
+          <h2><span data-i18n="analytics_title">Compare brand momentum over time</span></h2>
+        </div>
+        <p>
+          <span data-i18n="analytics_desc">Seleziona l’intervallo, scegli quali brand visualizzare e confronta l’andamento del <span data-i18n="dyp_score">DYP Score</span> sullo stesso grafico.</span>
+        </p>
+      </div>
+
+      <div class="analytics-layout">
+        <aside class="analytics-controls">
+          <h3><span data-i18n="analysis_desk">Analysis desk</span></h3>
+
+          <div class="control-block">
+            <label><span data-i18n="time_range">Time range</span></label>
+            <div class="range-buttons">
+              <button class="range-btn active" data-range="7D" onclick="setRange('7D')">7D</button>
+              <button class="range-btn" data-range="30D" onclick="setRange('30D')">30D</button>
+              <button class="range-btn" data-range="90D" onclick="setRange('90D')">90D</button>
+              <button class="range-btn" data-range="1Y" onclick="setRange('1Y')">1Y</button>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <label><span data-i18n="brands_label">Brands</span></label>
+            <div id="brandCheckboxes" class="brand-checkboxes"></div>
+          </div>
+
+          <div class="analytics-note">
+            <strong><span data-i18n="insight">Insight</span></strong>
+            <p id="analytics<span data-i18n="insight">Insight</span>">Red Bull mostra il momentum più forte nell’intervallo selezionato.</p>
+          </div>
+        </aside>
+
+        <div class="chart-panel">
+          <div class="chart-header">
+            <div>
+              <span><span data-i18n="dyp_score">DYP Score</span></span>
+              <h3><span data-i18n="brand_performance_comparison">Brand performance comparison</span></h3>
+            </div>
+            <strong id="selectedRangeLabel">7D</strong>
+          </div>
+
+          <div class="chart-wrap">
+            <svg id="scoreChart" viewBox="0 0 900 420" preserveAspectRatio="none"></svg>
+          </div>
+
+          <div id="chartLegend" class="chart-legend"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology" class="section methodology-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><span data-i18n="methodology_kicker">Methodology & Sources</span></span>
+          <h2><span data-i18n="methodology_title">How DYP evaluates brands</span></h2>
+        </div>
+        <p>
+          <span data-i18n="methodology_desc">La valutazione deve essere chiara: gli utenti devono capire perché un brand sale, scende o diventa interessante prima degli altri.</span>
+        </p>
+      </div>
+
+      <div class="method-layout">
+        <div class="method-card score-card">
+          <h3><span data-i18n="dyp_score">DYP Score</span></h3>
+          <p>
+            <span data-i18n="score_desc">Il <span data-i18n="dyp_score">DYP Score</span> è un indice settimanale da 0 a 100 che sintetizza la performance marketing di un brand combinando segnali pubblici, dati di engagement e aspettative della community.</span>
+          </p>
+
+          <div class="formula-box">
+            <span>Score =</span>
+            <strong>Social + Engagement + Search + Sentiment + Media + Community</strong>
+          </div>
+        </div>
+
+        <div class="weights-card">
+          <h3><span data-i18n="evaluation_weights">Evaluation weights</span></h3>
+          <div class="weight-row"><span>Social Growth</span><b>25%</b></div>
+          <div class="weight-bar"><i style="width: 25%"></i></div>
+
+          <div class="weight-row"><span>Engagement</span><b>20%</b></div>
+          <div class="weight-bar"><i style="width: 20%"></i></div>
+
+          <div class="weight-row"><span>Search Interest</span><b>20%</b></div>
+          <div class="weight-bar"><i style="width: 20%"></i></div>
+
+          <div class="weight-row"><span>Sentiment</span><b>15%</b></div>
+          <div class="weight-bar"><i style="width: 15%"></i></div>
+
+          <div class="weight-row"><span>Media Coverage</span><b>10%</b></div>
+          <div class="weight-bar"><i style="width: 10%"></i></div>
+
+          <div class="weight-row"><span>Community Expectations</span><b>10%</b></div>
+          <div class="weight-bar"><i style="width: 10%"></i></div>
+        </div>
+      </div>
+
+      <div class="source-grid">
+        <div class="source-card">
+          <h3><span data-i18n="social_media">Social Media</span></h3>
+          <p>Follower growth, engagement rate, views, comments, shares e contenuti virali.</p>
+          <span>Instagram · TikTok · YouTube · LinkedIn</span>
+        </div>
+        <div class="source-card">
+          <h3><span data-i18n="search_trends">Search Trends</span></h3>
+          <p>Interesse di ricerca e variazione delle query legate al brand.</p>
+          <span>Google Trends</span>
+        </div>
+        <div class="source-card">
+          <h3><span data-i18n="news_media">News & Media</span></h3>
+          <p>Menzioni, copertura mediatica, lanci, partnership e campagne pubbliche.</p>
+          <span>News · Press · Brand campaigns</span>
+        </div>
+        <div class="source-card">
+          <h3><span data-i18n="dyp_community">DYP Community</span></h3>
+          <p>Portfolio pubblicati, allocazioni, brand più scelti e aspettative settimanali.</p>
+          <span>Prediction data · Allocation data</span>
+        </div>
+      </div>
+    
+      <div class="legal-disclaimer-card">
+        <span class="kicker">Brand References</span>
+        <h3>Independent and informational use</h3>
+        <p>
+          DYP is an independent analytics and fantasy marketing platform. Brand names and visual references are used only for identification, comparison and informational purposes.
+          All trademarks, logos and brand names are the property of their respective owners. Their use does not imply endorsement, sponsorship or affiliation with DYP.
+        </p>
+      </div>
+
+    </section>
+
+    <section class="section value-section">
+      <div class="section-head centered">
+        <span class="kicker"><span data-i18n="value_kicker">When attention becomes value</span></span>
+        <h2><span data-i18n="value_title">Not likes. Not fandom. Real market vision.</span></h2>
+        <p>
+          <span data-i18n="value_desc">DYP trasforma l’attenzione verso campagne, lanci e trend in una competizione misurabile. Non conta quale brand ti piace. Conta quale brand hai capito prima degli altri.</span>
+        </p>
+      </div>
+
+      <div class="value-grid">
+        <div class="value-card">
+          <span>01</span>
+          <h3><span data-i18n="spot_signals">Spot Signals</span></h3>
+          <p>Intercetta segnali deboli: campagne, creator, search trend, discussioni e buzz.</p>
+        </div>
+        <div class="value-card active">
+          <span>02</span>
+          <h3><span data-i18n="build_conviction">Build Conviction</span></h3>
+          <p>Trasforma intuizioni in una scelta: assegna crediti ai brand in cui credi.</p>
+        </div>
+        <div class="value-card">
+          <span>03</span>
+          <h3><span data-i18n="prove_eye">Prove Your Eye</span></h3>
+          <p>Pubblica la tua previsione e lascia che i risultati dimostrino se avevi ragione.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ranking" class="section ranking-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><span data-i18n="leaderboard">Leaderboard</span></span>
+          <h2><span data-i18n="best_market_eyes">Best market eyes</span></h2>
+        </div>
+        <p><span data-i18n="ranking_desc">Il ranking premia chi ha letto meglio il mercato marketing della settimana.</span></p>
+      </div>
+
+      <div class="ranking-board">
+        <div class="rank-row head"><span>#</span><span>Player</span><span><span data-i18n="title_label">Title</span></span><span>Score</span></div>
+        <div class="rank-row"><span>01</span><span>🦉 marketmind</span><span>Visionary</span><strong>1,284</strong></div>
+        <div class="rank-row"><span>02</span><span>🐺 brandhunter</span><span>Trend Hunter</span><strong>1,241</strong></div>
+        <div class="rank-row"><span>03</span><span>🦊 dyp_rookie</span><span>Scout</span><strong>1,193</strong></div>
+        <div class="rank-row"><span>04</span><span>🐙 strategyboy</span><span>Analyst</span><strong>1,151</strong></div>
+      </div>
+    </section>
+  
+    <section id="admin" class="section admin-section admin-private-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Admin Dashboard</span>
+          <h2>DYP activity overview</h2>
+        </div>
+        <p>Private area. Visible only to the DYP admin account after login.</p>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-card"><span>Registered users</span><strong id="adminUsers">0</strong></div>
+        <div class="admin-card"><span>Published portfolios</span><strong id="adminPortfolios">0</strong></div>
+        <div class="admin-card"><span>Most picked brand</span><strong id="adminTopBrand">-</strong></div>
+        <div class="admin-card"><span>Backend status</span><strong id="adminFirebase">Demo</strong></div>
+      </div>
+
+      <div class="admin-table-card">
+        <h3>Latest profiles</h3>
+        <div id="adminUsersList" class="admin-users-list">
+          <p>No users yet.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer><div class="logo footer-logo"><strong>DYP</strong><span>Did You Publish?</span></div><p>DYP is an independent analytics platform. All trademarks, logos and brand names are the property of their respective owners.</p></footer>
+  <footer>
+    <a class="dyp-header-logo dyp-footer-logo" href="#">
+      <div class="dyp-header-main dyp-footer-main">DYP</div>
+      <div class="dyp-header-sub">Did You Publish?</div>
+    </a>
+      <div class="word-sub">Did You Publish?</div>
+    </div>
+    <p class="footer-legal">
+      DYP is an independent analytics platform. All trademarks, logos and brand names are the property of their respective owners.
+      Their use is for identification and informational purposes only and does not imply endorsement, sponsorship or affiliation with DYP.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
   <script src="firebase-config.js"></script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="firebase-app.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
-// DYP Firebase configuration.
-// Firebase web config values are public identifiers, not passwords.
-// Keep Firestore rules safe.
+// DYP Firebase config.
+// Firebase Web config identifiers are public.
+// Never hardcode admin passwords in frontend code.
 
 window.DYP_FIREBASE = {
   enabled: true,
@@ -14,5 +14,9 @@ window.DYP_FIREBASE = {
     appId: "1:553803049106:web:b522c4742075aaef241e4b"
   }
 };
+
+// Only this email can see the private Admin dashboard.
+// Change it here if needed.
+window.DYP_ADMIN_EMAIL = "yogesh.bokhoree@gmail.com";
 
 window.DYP_GA_MEASUREMENT_ID = "G-JJ2P3YC4K4";
