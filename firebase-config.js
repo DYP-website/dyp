@@ -1,10 +1,6 @@
-// DYP Firebase configuration
-// Free setup:
-// 1) Create Firebase project
-// 2) Enable Authentication -> Email/Password
-// 3) Create Firestore Database
-// 4) Paste your web app config below
-// 5) Set enabled: true
+// DYP Firebase configuration.
+// Firebase web config values are public identifiers, not passwords.
+// Keep Firestore rules safe.
 
 window.DYP_FIREBASE = {
   enabled: true,
