@@ -89,18 +89,10 @@ Il cambio lingua usa JavaScript e localStorage. Non richiede backend.
 - Bottone Publish diventa Published dopo pubblicazione card.
 
 
-## v14 No Avatars + Legal Brand Badges
-- Rimossi completamente gli avatar.
-- Registrazione semplice: username, email, password.
-- Profilo basato su DYP Rating, Title, Credits, Market Vision, Badge Cabinet.
-- Aggiunti brand badge monocromatici non ufficiali accanto ai brand.
-- Aggiunto disclaimer legale in Methodology e Footer.
-- I badge sono identificativi/informativi e non implicano affiliazione o sponsorship.
-
-
-## v15 Clean Header Logo
-- Header alto a sinistra corretto:
-  - DYP grande
-  - Did You Publish? piccolo sotto
-  - rimosso Fantasy Marketing Exchange
-  - rimosso riquadro/logo precedente
+## v16 Free Firebase Ready
+- Firebase Auth ready
+- Firestore user/portfolio saving ready
+- Demo fallback active
+- Admin dashboard
+- Leaderboard
+- See FIREBASE_SETUP.md

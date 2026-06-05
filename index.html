@@ -47,6 +47,7 @@
       </div>
 
       <a href="#profile"><span data-i18n="nav_profile">Profile</span></a>
+      <a href="#admin">Admin</a>
     </nav>
 
     <div class="nav-actions">
@@ -129,41 +130,43 @@
     <section id="signup" class="section signup-section">
       <div class="section-head signup-head">
         <div>
-          <span class="kicker" data-i18n="signup_kicker">Free onboarding</span>
-          <h2><span data-i18n="signup_title">Create your DYP profile</span></h2>
-          <p class="signup-subtitle" data-i18n="signup_desc">Create your DYP profile with username, email and password. No avatars, no external login, no unnecessary steps.</p>
+          <span class="kicker">Free onboarding</span>
+          <h2>Create your DYP profile</h2>
+          <p class="signup-subtitle">Create a free account with username, email and password. Once Firebase is configured, registrations and portfolios are saved online.</p>
         </div>
       </div>
 
       <div class="clean-signup-shell">
         <div class="signup-card clean-form-card">
-          <h3 data-i18n="account_access">Create account</h3>
+          <h3>Create account</h3>
 
-          <label><span data-i18n="username_label">DYP Username</span></label>
+          <label>DYP Username</label>
           <input id="usernameInput" type="text" placeholder="Your username" oninput="updateProfilePreview()" />
 
-          <label><span data-i18n="email_label">Email</span></label>
+          <label>Email</label>
           <input id="emailInput" type="email" placeholder="you@example.com" />
 
-          <label><span data-i18n="password_label">Password</span></label>
+          <label>Password</label>
           <input id="passwordInput" type="password" placeholder="Minimum 8 characters" />
 
-          <button class="primary full form-create-btn" onclick="createProfile()" data-i18n="create_profile">CREATE PROFILE</button>
+          <button class="primary full form-create-btn" onclick="createProfile()">CREATE PROFILE</button>
+          <button class="ghost full login-btn" onclick="loginProfile()">LOGIN</button>
+          <button class="ghost full logout-btn" onclick="logoutProfile()">LOGOUT</button>
 
-          <p class="privacy-note">▢ <span data-i18n="safe_data_note">Your data is safe. Never shared with third parties.</span></p>
+          <p class="privacy-note">▢ Your data is used only to create your DYP profile and save your portfolio.</p>
           <p id="profileMessage" class="publish-message"></p>
         </div>
 
         <div class="profile-start-card">
-          <span class="kicker" data-i18n="starting_profile">Starting profile</span>
-          <h3>@marketeye</h3>
+          <span class="kicker">Starting profile</span>
+          <h3 id="signupPreviewUsername">@marketeye</h3>
           <div class="start-stats">
             <div><span>DYP Rating</span><strong>500</strong></div>
             <div><span>Title</span><strong>Observer</strong></div>
             <div><span>DYP Credits</span><strong>100</strong></div>
-            <div><span>Market Vision</span><strong>0%</strong></div>
+            <div><span>Status</span><strong id="authStatus">Demo</strong></div>
           </div>
-          <p data-i18n="starting_profile_desc">Publish your first portfolio to enter the ranking and start building your reputation.</p>
+          <p>Publish your first portfolio to enter the ranking and start building your reputation.</p>
         </div>
       </div>
     </section>
@@ -184,17 +187,16 @@
           <div>
             <span class="profile-label">DYP Player</span>
             <h3 id="profileUsername">@marketeye</h3>
-            <p id="profileAnimal">Observer · build your reputation by publishing portfolios</p>
+            <p id="profileSubtitle">Observer · build your reputation by publishing portfolios</p>
           </div>
         </div>
 
         <div class="profile-stats">
-          <div><span><span data-i18n="dyp_rating">DYP Rating</span></span><strong>500</strong></div>
-          <div><span><span data-i18n="title_label">Title</span></span><strong>Observer</strong></div>
-          <div><span><span data-i18n="market_vision">Market Vision</span></span><strong>0%</strong></div>
-          <div><span><span data-i18n="publish_streak">Publish Streak</span></span><strong>0 weeks</strong></div>
+          <div><span>DYP Rating</span><strong id="profileRating">500</strong></div>
+          <div><span>Title</span><strong id="profileTitle">Observer</strong></div>
+          <div><span>Published Portfolios</span><strong id="profilePublished">0</strong></div>
+          <div><span>Current Streak</span><strong id="profileStreak">0 weeks</strong></div>
         </div>
-
 
         <div class="profile-portfolio-card">
           <div class="panel-title">
@@ -427,16 +429,6 @@
           <span>Prediction data · Allocation data</span>
         </div>
       </div>
-    
-      <div class="legal-disclaimer-card">
-        <span class="kicker">Brand References</span>
-        <h3>Independent and informational use</h3>
-        <p>
-          DYP is an independent analytics and fantasy marketing platform. Brand names and visual references are used only for identification, comparison and informational purposes.
-          All trademarks, logos and brand names are the property of their respective owners. Their use does not imply endorsement, sponsorship or affiliation with DYP.
-        </p>
-      </div>
-
     </section>
 
     <section class="section value-section">
@@ -476,7 +468,7 @@
         <p><span data-i18n="ranking_desc">Il ranking premia chi ha letto meglio il mercato marketing della settimana.</span></p>
       </div>
 
-      <div class="ranking-board">
+      <div class="ranking-board" id="leaderboardBoard">
         <div class="rank-row head"><span>#</span><span>Player</span><span><span data-i18n="title_label">Title</span></span><span>Score</span></div>
         <div class="rank-row"><span>01</span><span>🦉 marketmind</span><span>Visionary</span><strong>1,284</strong></div>
         <div class="rank-row"><span>02</span><span>🐺 brandhunter</span><span>Trend Hunter</span><strong>1,241</strong></div>
@@ -484,6 +476,29 @@
         <div class="rank-row"><span>04</span><span>🐙 strategyboy</span><span>Analyst</span><strong>1,151</strong></div>
       </div>
     </section>
+  
+    <section id="admin" class="section admin-section">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Admin Dashboard</span>
+          <h2>DYP activity overview</h2>
+        </div>
+        <p>Free MVP dashboard. With Firebase configured, this reads real users and portfolios. Without Firebase, it reads local demo data.</p>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-card"><span>Registered users</span><strong id="adminUsers">0</strong></div>
+        <div class="admin-card"><span>Published portfolios</span><strong id="adminPortfolios">0</strong></div>
+        <div class="admin-card"><span>Most picked brand</span><strong id="adminTopBrand">-</strong></div>
+        <div class="admin-card"><span>Firebase status</span><strong id="adminFirebase">Demo</strong></div>
+      </div>
+
+      <div class="admin-table-card">
+        <h3>Latest profiles</h3>
+        <div id="adminUsersList" class="admin-users-list"><p>No users yet.</p></div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -497,6 +512,8 @@
     </p>
   </footer>
 
-  <script src="script.js"></script>
+  
+  <script src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

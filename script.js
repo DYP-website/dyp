@@ -449,35 +449,35 @@ function initLanguage() {
 }
 
 const brands = [
-  { name: "Red Bull", logo: "RB", sector: "Beverage", score: 91, change: 12.4, signal: "Viral momentum", color: "#ffffff" },
-  { name: "Nike", logo: "N", sector: "Sportswear", score: 88, change: 8.1, signal: "Campaign lift", color: "#81ffb0" },
-  { name: "Ferrari", logo: "F", sector: "Luxury / Auto", score: 84, change: 5.8, signal: "Brand heat", color: "#ffd166" },
-  { name: "Apple", logo: "A", sector: "Tech", score: 81, change: 3.9, signal: "Search trend", color: "#8a7cff" },
-  { name: "Prada", logo: "P", sector: "Luxury", score: 76, change: 4.2, signal: "Fashion buzz", color: "#ff9fcb" },
-  { name: "Adidas", logo: "AD", sector: "Sportswear", score: 73, change: -2.7, signal: "Weak sentiment", color: "#ff7272" },
-  { name: "Coca-Cola", logo: "CC", sector: "Beverage", score: 82, change: 4.6, signal: "Campaign recall", color: "#e85d75" },
-  { name: "Pepsi", logo: "P", sector: "Beverage", score: 74, change: 1.8, signal: "Stable buzz", color: "#5aa9ff" },
-  { name: "Heineken", logo: "H", sector: "Beverage", score: 70, change: -1.2, signal: "Low momentum", color: "#2dd36f" },
-  { name: "Puma", logo: "PM", sector: "Sportswear", score: 79, change: 6.2, signal: "Creator lift", color: "#d8d8d8" },
-  { name: "New Balance", logo: "NB", sector: "Sportswear", score: 77, change: 5.1, signal: "Fashion crossover", color: "#c8a2ff" },
-  { name: "Samsung", logo: "S", sector: "Tech", score: 80, change: 2.9, signal: "Product buzz", color: "#5b8cff" },
-  { name: "NVIDIA", logo: "NV", sector: "Tech", score: 89, change: 9.7, signal: "AI momentum", color: "#76b900" },
-  { name: "Sony", logo: "SY", sector: "Tech / Entertainment", score: 75, change: 2.1, signal: "Entertainment lift", color: "#f4f7fb" },
-  { name: "Tesla", logo: "T", sector: "Automotive", score: 83, change: 7.2, signal: "High volatility", color: "#ff4d4d" },
-  { name: "BMW", logo: "BM", sector: "Automotive", score: 72, change: 1.4, signal: "Brand consistency", color: "#6bbcff" },
-  { name: "Mercedes-Benz", logo: "MB", sector: "Automotive", score: 74, change: 2.3, signal: "Luxury positioning", color: "#d6d6d6" },
-  { name: "Porsche", logo: "PR", sector: "Automotive", score: 78, change: 4.4, signal: "Premium heat", color: "#ffcc66" },
-  { name: "Gucci", logo: "G", sector: "Luxury", score: 79, change: 3.7, signal: "Fashion conversation", color: "#b8ffb8" },
-  { name: "Louis Vuitton", logo: "LV", sector: "Luxury", score: 86, change: 6.9, signal: "Cultural relevance", color: "#c49a6c" },
-  { name: "Starbucks", logo: "SB", sector: "Food & Drink", score: 71, change: -0.8, signal: "Mixed sentiment", color: "#2ecc71" },
-  { name: "McDonald's", logo: "M", sector: "Food", score: 82, change: 5.6, signal: "Mass-market campaign", color: "#ffcc00" },
-  { name: "Netflix", logo: "N", sector: "Entertainment", score: 85, change: 7.8, signal: "Release momentum", color: "#e50914" },
-  { name: "Spotify", logo: "SP", sector: "Entertainment", score: 80, change: 4.9, signal: "Creator ecosystem", color: "#1db954" },
-  { name: "Disney", logo: "D", sector: "Entertainment", score: 76, change: 2.2, signal: "IP strength", color: "#8fb9ff" },
-  { name: "Prime Video", logo: "PV", sector: "Entertainment", score: 73, change: 1.9, signal: "Content push", color: "#00a8e1" },
-  { name: "Sephora", logo: "SE", sector: "Beauty", score: 78, change: 5.3, signal: "Beauty buzz", color: "#ffffff" },
-  { name: "L'Oréal", logo: "LO", sector: "Beauty", score: 77, change: 3.4, signal: "Influencer lift", color: "#e6c27a" },
-  { name: "Dyson", logo: "DY", sector: "Lifestyle", score: 81, change: 6.1, signal: "Product desirability", color: "#bdbdbd" }
+  { name: "Red Bull", sector: "Beverage", score: 91, change: 12.4, signal: "Viral momentum", color: "#ffffff" },
+  { name: "Nike", sector: "Sportswear", score: 88, change: 8.1, signal: "Campaign lift", color: "#81ffb0" },
+  { name: "Ferrari", sector: "Luxury / Auto", score: 84, change: 5.8, signal: "Brand heat", color: "#ffd166" },
+  { name: "Apple", sector: "Tech", score: 81, change: 3.9, signal: "Search trend", color: "#8a7cff" },
+  { name: "Prada", sector: "Luxury", score: 76, change: 4.2, signal: "Fashion buzz", color: "#ff9fcb" },
+  { name: "Adidas", sector: "Sportswear", score: 73, change: -2.7, signal: "Weak sentiment", color: "#ff7272" },
+  { name: "Coca-Cola", sector: "Beverage", score: 82, change: 4.6, signal: "Campaign recall", color: "#e85d75" },
+  { name: "Pepsi", sector: "Beverage", score: 74, change: 1.8, signal: "Stable buzz", color: "#5aa9ff" },
+  { name: "Heineken", sector: "Beverage", score: 70, change: -1.2, signal: "Low momentum", color: "#2dd36f" },
+  { name: "Puma", sector: "Sportswear", score: 79, change: 6.2, signal: "Creator lift", color: "#d8d8d8" },
+  { name: "New Balance", sector: "Sportswear", score: 77, change: 5.1, signal: "Fashion crossover", color: "#c8a2ff" },
+  { name: "Samsung", sector: "Tech", score: 80, change: 2.9, signal: "Product buzz", color: "#5b8cff" },
+  { name: "NVIDIA", sector: "Tech", score: 89, change: 9.7, signal: "AI momentum", color: "#76b900" },
+  { name: "Sony", sector: "Tech / Entertainment", score: 75, change: 2.1, signal: "Entertainment lift", color: "#f4f7fb" },
+  { name: "Tesla", sector: "Automotive", score: 83, change: 7.2, signal: "High volatility", color: "#ff4d4d" },
+  { name: "BMW", sector: "Automotive", score: 72, change: 1.4, signal: "Brand consistency", color: "#6bbcff" },
+  { name: "Mercedes-Benz", sector: "Automotive", score: 74, change: 2.3, signal: "Luxury positioning", color: "#d6d6d6" },
+  { name: "Porsche", sector: "Automotive", score: 78, change: 4.4, signal: "Premium heat", color: "#ffcc66" },
+  { name: "Gucci", sector: "Luxury", score: 79, change: 3.7, signal: "Fashion conversation", color: "#b8ffb8" },
+  { name: "Louis Vuitton", sector: "Luxury", score: 86, change: 6.9, signal: "Cultural relevance", color: "#c49a6c" },
+  { name: "Starbucks", sector: "Food & Drink", score: 71, change: -0.8, signal: "Mixed sentiment", color: "#2ecc71" },
+  { name: "McDonald's", sector: "Food", score: 82, change: 5.6, signal: "Mass-market campaign", color: "#ffcc00" },
+  { name: "Netflix", sector: "Entertainment", score: 85, change: 7.8, signal: "Release momentum", color: "#e50914" },
+  { name: "Spotify", sector: "Entertainment", score: 80, change: 4.9, signal: "Creator ecosystem", color: "#1db954" },
+  { name: "Disney", sector: "Entertainment", score: 76, change: 2.2, signal: "IP strength", color: "#8fb9ff" },
+  { name: "Prime Video", sector: "Entertainment", score: 73, change: 1.9, signal: "Content push", color: "#00a8e1" },
+  { name: "Sephora", sector: "Beauty", score: 78, change: 5.3, signal: "Beauty buzz", color: "#ffffff" },
+  { name: "L'Oréal", sector: "Beauty", score: 77, change: 3.4, signal: "Influencer lift", color: "#e6c27a" },
+  { name: "Dyson", sector: "Lifestyle", score: 81, change: 6.1, signal: "Product desirability", color: "#bdbdbd" }
 ];
 
 const avatars = [
@@ -1114,114 +1114,3 @@ document.addEventListener("DOMContentLoaded", function() {
 setTimeout(renderFinalAvatars, 50);
 setTimeout(renderFinalAvatars, 300);
 setTimeout(updateTopPublishButton, 100);
-
-/* v14 no avatars + legal brand badges */
-function brandBadge(brand) {
-  return `<span class="brand-logo-badge" aria-label="${brand.name} identifier">${brand.logo || brand.name.slice(0,2).toUpperCase()}</span>`;
-}
-
-function renderMarket() {
-  const grid = document.getElementById("marketGrid");
-  if (!grid) return;
-  grid.innerHTML = brands.slice(0, 12).map(brand => `
-    <article class="brand-card">
-      <div class="brand-top">
-        <div class="brand-title-with-logo">
-          ${brandBadge(brand)}
-          <div>
-            <div class="brand-name">${brand.name}</div>
-            <div class="brand-sector">${brand.sector}</div>
-          </div>
-        </div>
-        <div class="brand-score">
-          <strong>${brand.score}</strong>
-          <span class="${brand.change >= 0 ? 'positive' : 'negative'}">
-            ${brand.change >= 0 ? '+' : ''}${brand.change}%
-          </span>
-        </div>
-      </div>
-      <div class="brand-bottom">
-        <span>${brand.signal}</span>
-        <span>DYP Score</span>
-      </div>
-    </article>
-  `).join("");
-}
-
-function renderAllBrands() {
-  const grid = document.getElementById("allBrandsGrid");
-  if (!grid) return;
-
-  grid.innerHTML = brands.map(brand => `
-    <article class="compact-brand-card">
-      <div class="brand-title-with-logo compact">
-        ${brandBadge(brand)}
-        <div>
-          <h3>${brand.name}</h3>
-          <p>${brand.sector}</p>
-        </div>
-      </div>
-      <div class="compact-row">
-        <span>DYP ${brand.score}</span>
-        <b class="${brand.change >= 0 ? 'positive' : 'negative'}">${brand.change >= 0 ? '+' : ''}${brand.change}%</b>
-      </div>
-    </article>
-  `).join("");
-}
-
-function renderBrandCheckboxes() {
-  const box = document.getElementById("brandCheckboxes");
-  if (!box) return;
-  box.innerHTML = brands.slice(0, 16).map(brand => `
-    <label class="check-row brand-check-row">
-      <input type="checkbox" ${selectedBrands.includes(brand.name) ? "checked" : ""} value="${brand.name}" onchange="toggleBrand('${brand.name}', this.checked)" />
-      ${brandBadge(brand)}
-      <b>${brand.name}</b>
-    </label>
-  `).join("");
-}
-
-function updateProfilePreview() {
-  const usernameInput = document.getElementById("usernameInput");
-  const username = usernameInput && usernameInput.value.trim() ? usernameInput.value.trim() : "marketeye";
-  const usernameBox = document.getElementById("profileUsername");
-  const profileSubtitle = document.getElementById("profileAnimal");
-  if (usernameBox) usernameBox.textContent = username.startsWith("@") ? username : "@" + username;
-  if (profileSubtitle) profileSubtitle.textContent = "Observer · build your reputation by publishing portfolios";
-}
-
-function createProfile() {
-  const usernameInput = document.getElementById("usernameInput");
-  const username = usernameInput ? usernameInput.value.trim() : "";
-  const message = document.getElementById("profileMessage");
-  if (!username) {
-    if (message) {
-      message.textContent = "Choose a username before creating your profile.";
-      message.style.color = "#ff7272";
-    }
-    return;
-  }
-  updateProfilePreview();
-  if (message) {
-    message.textContent = "Profile created. Starting rating: 500 · Title: Observer.";
-    message.style.color = "#81ffb0";
-  }
-  scrollToSection("profile");
-}
-
-/* Disable avatar rendering safely */
-function renderAvatars() {}
-function selectAvatar() {}
-
-document.addEventListener("DOMContentLoaded", function() {
-  renderMarket();
-  renderAllBrands();
-  renderBrandCheckboxes();
-  updateProfilePreview();
-});
-setTimeout(function() {
-  renderMarket();
-  renderAllBrands();
-  renderBrandCheckboxes();
-  updateProfilePreview();
-}, 100);
