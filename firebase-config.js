@@ -7,17 +7,16 @@
 // 5) Set enabled: true
 
 window.DYP_FIREBASE = {
-  enabled: false,
+  enabled: true,
 
   firebaseConfig: {
-    apiKey: "PASTE_API_KEY_HERE",
-    authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-    projectId: "PASTE_PROJECT_ID",
-    storageBucket: "PASTE_PROJECT_ID.appspot.com",
-    messagingSenderId: "PASTE_SENDER_ID",
-    appId: "PASTE_APP_ID"
+    apiKey: "QUI_API_KEY",
+    authDomain: "dyp-5db75.firebaseapp.com",
+    projectId: "dyp-5db75",
+    storageBucket: "dyp-5db75.firebasestorage.app",
+    messagingSenderId: "553803049106",
+    appId: "1:553803049106:web:b522c4742075aaef241e4b"
   }
 };
 
-// Optional Google Analytics ID, example: "G-XXXXXXXXXX"
-window.DYP_GA_MEASUREMENT_ID = "";
+window.DYP_GA_MEASUREMENT_ID = "G-JJ2P3YC4K4";
