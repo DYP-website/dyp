@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DYP — Did You Publish?</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-mode="landing">
+  <header class="topbar">
+    <button class="logoBtn" onclick="showLanding()">
+      <span class="logoMain">DYP</span>
+      <span class="logoSub">Did You Publish?</span>
+    </button>
+
+    <nav id="brandNav" class="nav brandNav">
+      <a href="#brand-market">Market</a>
+      <a href="#brand-analytics">Analytics</a>
+      <a href="#brand-card">Brand Card</a>
+      <a href="#brand-ranking">Ranking</a>
+      <a href="#profile">Profile</a>
+      <button onclick="enterMode('football')" class="switchBtn">Go to Football</button>
+    </nav>
+
+    <nav id="footballNav" class="nav footballNav">
+      <a href="#football-fixtures">Fixtures</a>
+      <a href="#football-card">Football Card</a>
+      <a href="#football-analytics">Analytics</a>
+      <a href="#football-methodology">Methodology</a>
+      <a href="#football-ranking">Ranking</a>
+      <a href="#profile">Profile</a>
+      <button onclick="enterMode('brand')" class="switchBtn">Go to Brand</button>
+    </nav>
+
+    <button id="publishTop" class="publishTop" onclick="goToPublish()">PUBLISH</button>
+  </header>
+
+  <main>
+    <section id="landing" class="landing">
+      <div class="landingHead">
+        <h1>DYP</h1>
+        <p>Did You Publish?</p>
+      </div>
+
+      <div class="choiceGrid">
+        <article class="choiceCard brandChoice">
+          <span class="pill">DYP Brand</span>
+          <h2>Fantasy Marketing Exchange</h2>
+          <p>Predict which brands will gain momentum. Allocate 100 points, publish your card, and compete in the Brand ranking.</p>
+          <button class="primary" onclick="enterMode('brand')">Enter Brand DYP</button>
+        </article>
+
+        <article class="choiceCard footballChoice">
+          <span class="pill">DYP Football</span>
+          <h2>World Cup Prediction Exchange</h2>
+          <p>Predict World Cup matches week by week. Allocate 100 football points across 1 / X / 2 and publish one card per week.</p>
+          <button class="primary" onclick="enterMode('football')">Enter Football DYP</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="brandApp" class="appMode brandApp">
+      <section id="brand-market" class="hero brandHero">
+        <div>
+          <span class="pill">Week 01 Market Open</span>
+          <h1>DYP Brand</h1>
+          <p class="lead">Leggi il mercato dei brand. Pubblica la tua previsione. Dimostra di avere occhio.</p>
+          <div class="heroActions">
+            <button class="primary" onclick="scrollToId('brand-card')">Create Brand Card</button>
+            <button class="secondary" onclick="scrollToId('brand-analytics')">Explore Analytics</button>
+          </div>
+        </div>
+
+        <div class="marketPanel">
+          <div class="panelTop">
+            <span>DYP Market Index</span>
+            <strong>LIVE</strong>
+          </div>
+          <h2>1,284.66</h2>
+          <p class="positive">+8.42%</p>
+          <div class="miniBars" id="brandMiniBars"></div>
+          <div id="brandTopList"></div>
+        </div>
+      </section>
+
+      <section id="brand-analytics" class="section">
+        <div class="sectionHead">
+          <span class="pill">Brand Analytics</span>
+          <h2>Brand momentum analytics</h2>
+          <p>Trend demo dei principali brand. In futuro qui entrano dati social, search, sentiment e campaign visibility.</p>
+        </div>
+        <div class="analyticsLayout">
+          <div class="card">
+            <h3>Select brand</h3>
+            <select id="brandSelect" onchange="renderBrandAnalytics()"></select>
+            <div id="brandStats" class="statsGrid"></div>
+          </div>
+          <div class="card chartCard">
+            <canvas id="brandCanvas" width="900" height="420"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="brand-card" class="section">
+        <div class="sectionHead">
+          <span class="pill">Brand Card</span>
+          <h2>Publish your Brand DYP card</h2>
+          <p>Hai 100 punti brand. Allocane quanti vuoi sui brand in cui credi di più.</p>
+        </div>
+
+        <div class="portfolioLayout">
+          <div class="card">
+            <div class="cardTop">
+              <h3>Build brand card</h3>
+              <div class="totalPill">Total: <b id="brandTotal">0</b>/100</div>
+            </div>
+            <div id="brandAllocationList"></div>
+            <button class="primary full" onclick="publishBrandCard()">PUBLISH BRAND CARD</button>
+            <p id="brandMessage" class="message"></p>
+          </div>
+
+          <div class="card">
+            <h3>Scoring</h3>
+            <p class="muted">Brand Score = Σ allocated points × weekly momentum.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="brand-ranking" class="section">
+        <div class="sectionHead">
+          <span class="pill">Brand Ranking</span>
+          <h2>Brand DYP leaderboard</h2>
+        </div>
+        <div id="brandLeaderboard" class="leaderboard card"></div>
+      </section>
+    </section>
+
+    <section id="footballApp" class="appMode footballApp">
+      <section id="football-fixtures" class="section footballFirst">
+        <div class="sectionHead">
+          <span class="pill">Football DYP</span>
+          <h2>World Cup Week Fixtures</h2>
+          <p id="weekInfo">Week 1 · 8 Jun 2026 – 14 Jun 2026</p>
+        </div>
+        <div id="fixturesGrid" class="fixturesGrid"></div>
+      </section>
+
+      <section id="football-card" class="section">
+        <div class="sectionHead">
+          <span class="pill">Football Card</span>
+          <h2>Publish your weekly football card</h2>
+          <p>Hai 100 punti calcio separati dai 100 punti brand. Per ogni match scegli 1, X o 2. Una sola scheda per week.</p>
+        </div>
+
+        <div class="portfolioLayout">
+          <div class="card">
+            <div class="cardTop">
+              <h3>Build football card</h3>
+              <div class="totalPill">Total: <b id="footballTotal">0</b>/100</div>
+            </div>
+            <div id="footballPredictionList"></div>
+            <button class="primary full" onclick="publishFootballCard()">PUBLISH FOOTBALL CARD</button>
+            <p id="footballMessage" class="message"></p>
+          </div>
+
+          <div class="card">
+            <h3>How it works</h3>
+            <p class="muted">Football Score = Σ allocated points × outcome multiplier. Il pareggio potrà avere un moltiplicatore più alto nelle versioni future.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="football-analytics" class="section">
+        <div class="sectionHead">
+          <span class="pill">Football Analytics</span>
+          <h2>Team form analytics</h2>
+          <p>Ultime 10 partite, ranking mondiale demo, gol fatti e subiti. Clicca sui punti del grafico per vedere la partita.</p>
+        </div>
+
+        <div class="analyticsLayout">
+          <div class="card">
+            <h3>Select team</h3>
+            <select id="teamSelect" onchange="renderFootballAnalytics()"></select>
+            <div id="teamStats" class="statsGrid"></div>
+            <div id="teamRanking" class="rankingBadge"></div>
+          </div>
+          <div class="card chartCard">
+            <canvas id="footballCanvas" width="900" height="420"></canvas>
+            <p id="footballTooltip" class="muted">Click a point to inspect the match.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="football-methodology" class="section">
+        <div class="sectionHead">
+          <span class="pill">Methodology</span>
+          <h2>How Football DYP estimates form</h2>
+        </div>
+        <div class="card">
+          <p>Football DYP usa un form index basato sulle ultime 10 partite: vittorie, pareggi, sconfitte, gol fatti, gol subiti, differenza reti e difficoltà avversario.</p>
+          <p>Nel MVP i dati sono demo/precaricati per validare la meccanica. In produzione si collega una football API per aggiornare partite, risultati e ranking in automatico.</p>
+          <p>Le week sono fisse: Week 1 = 8–14 giugno 2026, Week 2 = 15–21 giugno 2026, e così via. Ogni utente può pubblicare una sola card calcio per week.</p>
+        </div>
+      </section>
+
+      <section id="football-ranking" class="section">
+        <div class="sectionHead">
+          <span class="pill">Football Ranking</span>
+          <h2>Football DYP leaderboard</h2>
+        </div>
+        <div id="footballLeaderboard" class="leaderboard card"></div>
+      </section>
+    </section>
+
+    <section id="profile" class="section sharedSection">
+      <div class="sectionHead">
+        <span class="pill">Profile</span>
+        <h2>Create or login</h2>
+      </div>
+
+      <div class="authGrid">
+        <div class="card">
+          <h3>DYP Account</h3>
+          <label>Username</label>
+          <input id="usernameInput" placeholder="Arvin" />
+          <label>Email</label>
+          <input id="emailInput" type="email" placeholder="you@example.com" />
+          <label>Password</label>
+          <input id="passwordInput" type="password" placeholder="minimum 8 characters" />
+          <button class="primary full" onclick="createProfile()">CREATE PROFILE</button>
+          <button class="secondary full" onclick="loginProfile()">LOGIN</button>
+          <button class="secondary full" onclick="logoutProfile()">LOGOUT</button>
+          <p id="profileMessage" class="message"></p>
+        </div>
+
+        <div class="card profileCard">
+          <span class="pill">DYP Player</span>
+          <h3 id="profileName">@guest</h3>
+          <div class="statsGrid">
+            <div><span>Brand cards</span><strong id="profileBrandCards">0</strong></div>
+            <div><span>Football cards</span><strong id="profileFootballCards">0</strong></div>
+            <div><span>Rating</span><strong id="profileRating">500</strong></div>
+            <div><span>Status</span><strong id="backendStatus">Demo</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="admin" class="section adminSection">
+      <div class="sectionHead">
+        <span class="pill">Private Admin</span>
+        <h2>Admin dashboard</h2>
+      </div>
+      <div class="statsGrid">
+        <div><span>Users</span><strong id="adminUsers">0</strong></div>
+        <div><span>Brand cards</span><strong id="adminBrandCards">0</strong></div>
+        <div><span>Football cards</span><strong id="adminFootballCards">0</strong></div>
+        <div><span>Top football pick</span><strong id="adminTopFootball">-</strong></div>
+      </div>
+      <div class="card">
+        <h3>Latest users</h3>
+        <div id="adminUsersList"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="mode-controller.js"></script>
+  <script src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
