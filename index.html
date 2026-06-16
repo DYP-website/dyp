@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DYP World Cup 2026 — Free Edition</title>
+  <meta name="description" content="DYP World Cup 2026 Free Edition: daily prediction cards, national badges, team analytics and admin odds." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" onclick="DYP.scrollTo('home')">
+      <div class="brandMark">26</div>
+      <div>
+        <strong>DYP</strong>
+        <span>World Cup 2026</span>
+      </div>
+    </a>
+
+    <button class="mobileMenuBtn" onclick="DYP.toggleMobileMenu()" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav">
+      <a href="#matchday" onclick="DYP.scrollTo('matchday')">Matchday</a>
+      <a href="#prediction" onclick="DYP.scrollTo('prediction')">Daily Card</a>
+      <a href="#teams" onclick="DYP.scrollTo('teams')">Teams</a>
+      <a href="#analytics" onclick="DYP.scrollTo('analytics')">Analytics</a>
+      <a href="#badges" onclick="DYP.scrollTo('badges')">Badges</a>
+      <a href="#ranking" onclick="DYP.scrollTo('ranking')">Ranking</a>
+      <a href="#profile" onclick="DYP.scrollTo('profile')">Profile</a>
+      <a class="adminOnly" href="#admin" onclick="DYP.scrollTo('admin')">Admin</a>
+    </nav>
+
+    <div class="languageBox">
+      <span id="languageLabel">Language</span>
+      <button class="languageButton" onclick="DYP.toggleLanguage()">🌍</button>
+      <div id="languageMenu" class="languageMenu"></div>
+    </div>
+
+    <button class="publishBtn" onclick="DYP.scrollTo('prediction')" data-i18n="publishCard">Publish</button>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="heroCopy">
+        <span class="pill">Free Edition · API-ready</span>
+        <h1>DYP World Cup 2026</h1>
+        <p class="lead" data-i18n="heroLead">Publish your daily prediction card before kickoff. Win national badges. Climb the ranking.</p>
+
+        <div class="heroActions">
+          <button class="primary" onclick="DYP.scrollTo('prediction')" data-i18n="createCard">Create today’s card</button>
+          <button class="secondary" onclick="DYP.scrollTo('matchday')" data-i18n="viewMatchday">View matchday</button>
+        </div>
+
+        <div class="trustStrip">
+          <span>GitHub Pages</span>
+          <span>Firebase Free</span>
+          <span>Demo fallback</span>
+          <span>API-ready</span>
+        </div>
+      </div>
+
+      <div class="heroPanel">
+        <div class="floatingBall">⚽</div>
+        <span class="pill">Today’s deadline</span>
+        <h2 id="deadlineText">Before first kickoff</h2>
+        <p class="muted">Cards close at the first kickoff of the selected matchday. The MVP fallback is always visible even without live APIs.</p>
+        <div class="palette">
+          <i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </section>
+
+    <section id="profile" class="section">
+      <div class="sectionHead">
+        <span class="pill">Account</span>
+        <h2>Login or create profile</h2>
+        <p>Your profile stores cards, badges, streaks, avatar and rewards.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Create / Login</h3>
+          <label>Username</label>
+          <input id="usernameInput" placeholder="your username" />
+
+          <label>Email</label>
+          <input id="emailInput" type="email" placeholder="you@example.com" />
+
+          <label>Password</label>
+          <input id="passwordInput" type="password" placeholder="minimum 8 characters" />
+
+          <button class="primary full" onclick="DYPAuth.createProfile()">Create profile</button>
+          <button class="secondary full" onclick="DYPAuth.loginProfile()">Login</button>
+          <button class="ghost full" onclick="DYPAuth.logoutProfile()">Logout</button>
+          <p id="authMessage" class="message"></p>
+        </div>
+
+        <div class="card smartCard">
+          <h3>Choose your football avatar</h3>
+          <p class="muted">Users can pick a mini character now. Photo upload is prepared as a later Firebase Storage upgrade.</p>
+          <div id="avatarGrid" class="avatarGrid"></div>
+
+          <div class="profilePreview">
+            <div id="profileAvatar" class="profileAvatar">⚽</div>
+            <div>
+              <h3 id="profileName">@guest</h3>
+              <p id="profileStatus" class="muted">Not logged in</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="matchday" class="section">
+      <div class="sectionHead">
+        <span class="pill">Statistics</span>
+        <h2>Matchday center</h2>
+        <p>Fixtures, results, scorers, kickoff time and odds. Works immediately with local fallback data; later it can read live API data.</p>
+      </div>
+
+      <div class="toolbar">
+        <select id="matchdaySelect" onchange="DYP.renderMatchday()"></select>
+        <button class="secondary" onclick="DYP.renderMatchday()">Refresh view</button>
+        <span class="statusChip">Group stage</span>
+      </div>
+
+      <div id="matchGrid" class="matchGrid"></div>
+    </section>
+
+    <section id="prediction" class="section">
+      <div class="sectionHead">
+        <span class="pill">DYP Daily Card</span>
+        <h2>Publish today’s schedina</h2>
+        <p>One card per matchday. Choose 1 / X / 2. Correct predictions unlock national badges.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="cardTop">
+            <h3 id="predictionDayTitle">Today’s card</h3>
+            <span class="statusChip green">Open</span>
+          </div>
+
+          <div id="predictionList" class="predictionList"></div>
+
+          <button class="primary full" onclick="DYPAuth.publishDailyCard()">Publish daily card</button>
+          <p id="predictionMessage" class="message"></p>
+        </div>
+
+        <div class="card rewardCard">
+          <h3>Reward logic</h3>
+          <div class="rewardList">
+            <div><b>1</b><span>Correct home win → home nation badge</span></div>
+            <div><b>X</b><span>Correct draw → both national badges</span></div>
+            <div><b>2</b><span>Correct away win → away nation badge</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="teams" class="section">
+      <div class="sectionHead">
+        <span class="pill">Teams</span>
+        <h2>Group-stage team profiles</h2>
+        <p>Team profile, squad, upcoming group-stage fixtures and live-style group table.</p>
+      </div>
+
+      <div class="toolbar">
+        <select id="teamSelect" onchange="DYP.renderTeamProfile(); DYP.renderAnalytics();"></select>
+        <button class="secondary" onclick="DYP.renderTeamProfile(); DYP.renderAnalytics();">Open team</button>
+      </div>
+
+      <div class="grid2 equal">
+        <div class="card teamCard">
+          <div id="teamHeader"></div>
+          <div id="teamFixtures"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTop">
+            <h3>Squad</h3>
+            <span class="statusChip">By role</span>
+          </div>
+          <div class="squadTabs">
+            <button class="squadTab active" data-section="goalkeepers" onclick="renderSquadSection('goalkeepers')">Goalkeepers</button>
+            <button class="squadTab" data-section="defenders" onclick="renderSquadSection('defenders')">Defenders</button>
+            <button class="squadTab" data-section="midfielders" onclick="renderSquadSection('midfielders')">Midfielders</button>
+            <button class="squadTab" data-section="forwards" onclick="renderSquadSection('forwards')">Forwards</button>
+          </div>
+          <div id="teamSquad" class="squadGrid"></div>
+        </div>
+      </div>
+
+      <div class="card tableCard">
+        <h3>Group table</h3>
+        <div id="groupTable"></div>
+      </div>
+    </section>
+
+    <section id="analytics" class="section">
+      <div class="sectionHead">
+        <span class="pill">Analytics</span>
+        <h2>Form vs odds expectations</h2>
+        <p>Three visual layers: recent form, expected trajectory based on odds, and performance vs expectations.</p>
+      </div>
+
+      <div class="analyticsGrid">
+        <div class="card">
+          <h3>Selected team</h3>
+          <div id="analyticsStats" class="statsGrid"></div>
+          <div id="rankingBadge" class="rankingBadge"></div>
+        </div>
+
+        <div class="card chartCard">
+          <h3>Last 10 matches</h3>
+          <canvas id="formCanvas" width="900" height="340"></canvas>
+          <p id="formTooltip" class="muted">Click a point to inspect the match.</p>
+        </div>
+
+        <div class="card chartCard">
+          <h3>Expected path from odds</h3>
+          <canvas id="expectedCanvas" width="900" height="340"></canvas>
+        </div>
+
+        <div class="card chartCard">
+          <h3>Performance vs expectations</h3>
+          <canvas id="vsCanvas" width="900" height="340"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="badges" class="section">
+      <div class="sectionHead">
+        <span class="pill">Rewards</span>
+        <h2>Badge collection</h2>
+        <p>Badges are awarded when the daily card is settled. Locked badges are shown as future rewards.</p>
+      </div>
+
+      <div id="badgeCollection" class="badgeCollection"></div>
+    </section>
+
+    <section id="ranking" class="section">
+      <div class="sectionHead">
+        <span class="pill">Leaderboard</span>
+        <h2>DYP World Cup ranking</h2>
+      </div>
+      <div id="leaderboard" class="card leaderboard"></div>
+    </section>
+
+    <section id="knockout" class="section">
+      <div class="card knockout">
+        <span class="pill">Knockout Stage</span>
+        <h2>The group stage writes the story. The knockout stage creates legends.</h2>
+        <p>Waiting for the best moments. Available after the completion of the group stage.</p>
+      </div>
+    </section>
+
+    <section id="admin" class="section adminSection">
+      <div class="sectionHead">
+        <span class="pill">Private Admin</span>
+        <h2>Admin control room</h2>
+        <p>Only the configured admin account can edit odds and view private user data.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Edit match odds</h3>
+          <select id="adminMatchSelect" onchange="DYPAdmin.loadOdds()"></select>
+
+          <label>Home odds</label>
+          <input id="adminOddsHome" type="number" step="0.01" />
+
+          <label>Draw odds</label>
+          <input id="adminOddsDraw" type="number" step="0.01" />
+
+          <label>Away odds</label>
+          <input id="adminOddsAway" type="number" step="0.01" />
+
+          <button class="primary full" onclick="DYPAdmin.saveOdds()">Save odds</button>
+          <p id="adminOddsMessage" class="message"></p>
+        </div>
+
+        <div class="card">
+          <h3>Admin data</h3>
+          <div class="statsGrid">
+            <div><span>Users</span><strong id="adminUsers">0</strong></div>
+            <div><span>Cards</span><strong id="adminCards">0</strong></div>
+            <div><span>Badges</span><strong id="adminBadges">0</strong></div>
+            <div><span>Status</span><strong id="adminStatus">Hidden</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Latest users</h3>
+        <div id="adminUsersList"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="mobileBottomBar">
+    <button onclick="DYP.scrollTo('matchday')"><span>⚽</span><b>Matches</b></button>
+    <button onclick="DYP.scrollTo('prediction')" class="mainMobileAction"><span>✍️</span><b>Publish</b></button>
+    <button onclick="DYP.scrollTo('teams')"><span>🏳️</span><b>Teams</b></button>
+    <button onclick="DYP.scrollTo('profile')"><span>👤</span><b>Profile</b></button>
+  </div>
+
+  <footer>
+    <strong>DYP World Cup 2026</strong>
+    <p>DYP is an independent football prediction game. It is not affiliated with FIFA, SNAI, national teams, players or tournament organizers.</p>
+  </footer>
+
+  <script src="firebase-config.js"></script>
+  <script src="data.js"></script>
+  <script src="api-connectors.js"></script>
+  <script src="ui.js"></script>
+  <script type="module" src="firebase-app.js"></script>
+</body>
+</html>
