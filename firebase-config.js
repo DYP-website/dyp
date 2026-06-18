@@ -4,7 +4,7 @@
 window.DYP_FIREBASE = {
   enabled: true,
   firebaseConfig: {
-    apiKey: "AIzaSyAUVpRfFX4pLHH0IJqLKQ_HCFoQiadBuI",
+   apiKey: "AIzaSyAU_VpRfEX4nLHHOIJqLKQ_HCfoQiadBuI",
     authDomain: "dyp-2df2d.firebaseapp.com",
     projectId: "dyp-2df2d",
     storageBucket: "dyp-2df2d.firebasestorage.app",
