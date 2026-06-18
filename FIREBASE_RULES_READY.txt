@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn();
+      allow create, update: if isOwner(userId);
+    }
+
+    match /wcProfiles/{userId} {
+      allow read: if signedIn();
+      allow create, update: if isOwner(userId);
+    }
+
+    match /wcCards/{cardId} {
+      allow read: if signedIn();
+      allow create: if signedIn();
+      allow update: if signedIn();
+    }
+
+    match /wcBadges/{badgeId} {
+      allow read: if signedIn();
+      allow create, update: if signedIn();
+    }
+
+    match /wcRankings/{rankingId} {
+      allow read: if signedIn();
+      allow create, update: if signedIn();
+    }
+
+    match /wcLeagues/{leagueId} {
+      allow read: if signedIn();
+      allow create: if signedIn();
+      allow update: if signedIn();
+    }
+
+    match /leagues/{leagueId} {
+      allow read, write: if signedIn();
+    }
+
+    match /cards/{cardId} {
+      allow read, write: if signedIn();
+    }
+
+    match /badges/{badgeId} {
+      allow read, write: if signedIn();
+    }
+
+    match /rankings/{rankingId} {
+      allow read, write: if signedIn();
+    }
+  }
+}
