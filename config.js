@@ -7,7 +7,7 @@ window.DYP_LIVE_API = {
   footballData: {
     enabled: true,
     baseUrl: "https://api.football-data.org/v4",
-    token: "PASTE_YOUR_TOKEN_HERE",
+    token: "a6cc6ba719da4e328aeda057484bff75",
     competitionCode: "WC"
   }
 };
